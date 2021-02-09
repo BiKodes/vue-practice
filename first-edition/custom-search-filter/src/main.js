@@ -5,7 +5,7 @@ import VueResource from 'vue-resource'
 
 Vue.use(VueResource);
 
-// Filters
+//Custom Filters
 Vue.filter('to-uppercase', function(value){
   return value.toUpperCase();
 })
