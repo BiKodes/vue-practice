@@ -12,7 +12,8 @@ import showBlogs from './components/showBlogs.vue';
 export default {
   components: {
     'add-blog': addBlog,
-    'show-blogs': showBlogs
+    'show-blogs': showBlogs,
+    
   },
   data() {
     return {
