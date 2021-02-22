@@ -22,9 +22,7 @@ export default {
         search:''
     }
   },
-  methods: {
-   
-  },
+
     created() {
     this.$http.get('https://posting-firebase-ed-1-default-rtdb.firebaseio.com/posts.json').then(function(data){
         return data.json();

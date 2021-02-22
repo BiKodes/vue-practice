@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List App</title>
+</head>
+<body>
+    <div id="shopping-list">
+    <div class="header">
+        <h1>{{ header.toLocaleUpperCase() }}</h1>
+        <button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
+        <button v-else class="btn btn-cancel" @click="changeState('default')">Cancel</button>
+    </div>
+       <br>
+        <br>
+        <div v-if="state === 'edit'" class="add-item-form">
+            <input type="text" v-model="newItem" placeholder="Add an item" @keyup.enter="saveItem">
+            <button  class="btn btn-primary" v-bind:disabled="newItem.length === 0" @click="saveItem">Save Item</button>
+        </div>
+
+        <a v-bind:href="newItem" target="_blank">Dynamic Link</a>
+
+        <ul>
+            <li v-for='item in items' :class="{strikeout: item.purchased}">{{ item.label }}</li>
+            <br>
+            <br>
+            <li v-for='item in items' :class="[item.purchased ? 'strikeout' : '']">{{ item.label }}</li>
+            <br>
+            <br>
+            <li v-for='item in items' :class="[item.purchased ? 'strikeout' : '', item.highPriority ? 'priority' : '']">{{ item.label }}</li>
+            <br>
+            <br>
+            <li v-for='item in items' class="priority" :class="[item.purchased ? 'strikeout' : '']">{{ item.label }}</li>
+            <br>
+            <br>
+            <li v-for='item in items' :class="{strikeout: item.purchased}" @click="togglePurchased(item)">{{ item.label }}</li>
+        </ul>
+        <p v-if="items.length === 0">Nice job! You've bought all your items.</p>
+    </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script>
+   var shoppingList = new Vue({
+        el: '#shopping-list',
+        data: {
+            state: 'default',
+            header: 'shopping list app',
+            newItem: '',
+            items:  [
+                {
+                    label: '10 party hats',
+                    purchased: false,
+                    highPriority: false,
+                },
+                {
+                    label: '2 board games',
+                    purchased: true,
+                    highPriority: false,
+                },
+                {
+                    label: '20 cups',
+                    purchased: false,
+                    highPriority: true,
+                },
+            ]
+        },
+        methods: {
+            saveItem: function(){
+                this.items.push({
+                    label: this.newItem,
+                    purchased: false,
+                  
+                },);
+                this.newItem = '';
+            },
+            changeState: function(newState){
+                this.state = newState;
+
+                this.newItem = '';
+            },
+            togglePurchased: function(item) {
+                item.purchased = !item.purchased;
+            }
+        }        
+    });
+</script>
+</html>
