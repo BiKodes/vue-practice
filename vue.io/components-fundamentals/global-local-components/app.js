@@ -5,10 +5,26 @@ let planComponent = {
     props: {
         name: {
             type: String,
-            default: 'Biko',
             required: true  
-        },
-        price: Number     
+        } ,
+        
+        selectedPlan: {
+            type: String
+        }
+    },
+
+    computed: {
+        isSelected(){
+            return this.name === this.selectedPlan
+        }
+    },
+
+
+    methods: {
+        select() {
+            this.$emit('select', this.name)
+            this.selected = true
+        }
     }
 }
 
@@ -16,12 +32,19 @@ let planComponent = {
 let planPickerComponent = {
     template: '#plan-picker-template',
 
-    conponents: {
+    components: {
         plan: planComponent
     },
     data() {
         return {
-            plans: ['The Single', 'The Curious', 'The Addict']
+            plans: ['The Single', 'The Curious', 'The Addict'],
+            selectedPlan: null
+        }
+    },
+
+    methods: {
+        selectedPlan(plan){
+            this.selectedPlan = plan
         }
     }
 }
