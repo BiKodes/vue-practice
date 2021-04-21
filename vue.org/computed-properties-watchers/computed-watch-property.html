@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Computed & Watch Property</title>
+</head>
+<body>
+    <div id="app">{{ fullName }}</div>
+    <div id="app1">{{ fullName }}</div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+
+        data: {
+            firstName: 'Steve',
+            lastName: 'Biko',
+            fullName: 'Steve Biko'
+        },
+
+        watch: {
+            firstName: function(val) {
+                this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function(val) {
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    })
+
+    // a computed property version:
+    var vm = new Vue({
+        el: '#app1',
+
+        data: {
+            firstName: 'Light',
+            lastName: 'Biko'
+        },
+        computed: {
+            fullName: function(){
+                return this.firstName + ' ' + this.lastName
+            }
+        }
+    })
+</script>
+</html>
