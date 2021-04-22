@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Displaying Filtered/Sorted Results</title>
+</head>
+<body>
+    <div id="app">
+   
+            <li v-for="n in evenNumbers">{{ n }}</li>
+   
+    </div>
+    <br><br><br>
+    
+    <div id="app1">
+        <ul v-for="set in sets">
+            <li v-for="n in even(set)">
+                {{ n }}
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+           numbers: [ 1, 2, 3, 4, 5 ] 
+        },
+        computed: {
+            evenNumbers: function(){
+                return this.numbers.filter(function(number){
+                    return number % 2 === 0
+                })
+            }
+        }
+    })
+
+    var vm1 = new Vue({
+        el: "#app1",
+
+        data: {
+            sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]]
+        },
+
+        methods: {
+            even: function(numbers){
+                return numbers.filter(function(number){
+                    return number % 2 === 0 
+                })
+            }
+        }
+    })
+</script>
+</html>

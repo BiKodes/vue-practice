@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Mapping an Array to Elements with v-for</title>
+</head>
+<body>
+    
+        <ul id="app">
+            <li v-for="item of items" :key="item.message">
+                {{ item.message }}
+            </li>
+        </ul>
+
+        <br><br><br>
+
+        <ul id="app1">
+            <li v-for="(item, index) in items">
+                {{ parentMessage }} - {{ index }} - {{ item.message }}
+            </li>
+        </ul>    
+        
+       
+            <!-- <div v-for="item in items" v-bind:key="item.id">
+                {{ item.message }}
+            </div> -->
+          
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+
+        data: {
+            items: [
+                {message: 'Get It!'},
+                {message: 'Up Now!'}
+            ]
+        }
+
+    })
+
+    var vm1 = new Vue({
+        el: '#app1',
+
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                {message: 'Good'},
+                {message: 'Evil'}
+            ]
+        }
+    }) 
+
+</script>
+</html>
