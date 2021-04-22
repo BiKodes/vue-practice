@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Array Syntax</title>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:class="[activeClass, errorClass]">Passing an array to v-bind class.</div>
+
+        <!-- Toggle A Class -->
+        <div v-bind:class="[isActive ? activeClass : '', errorClass]">
+            To toggle a class in the list conditionally, you can do it with a ternary expression.
+        </div>
+
+        <!-- Object Syntax -->
+        <div v-bind:class="[{ active: isActive }, errorClass]">
+            Object sytax inside array.
+        </div>
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+</script>
+</html>

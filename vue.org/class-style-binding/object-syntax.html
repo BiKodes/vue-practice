@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Object Syntax</title>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:class="{ active: isActive }">Single Class</div> 
+
+        <!-- Multiple Classes -->
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">Multiple Classes</div>
+
+        <!-- Bound Object Doesnt Have To Be Inline -->
+        <div v-bind:class="classObject">The bound object doesn’t have to be inline.</div>
+
+        <!-- We can also bind to a computed property that returns an object. -->
+        <div v-bind:class="classObject">
+            We can also bind to a computed property that returns an object.
+        </div>
+
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+
+        data: {
+            isActive: true,
+            hasError: false,
+
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        },
+        computed: {
+            classObject: function() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+</html>
